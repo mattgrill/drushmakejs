@@ -13,8 +13,13 @@ app
   .use(bodyParser.urlencoded({extended: true}))
   .use(bodyParser.json({extended: true}))
   .use(express.static(__dirname + '/public'))
-  .get('/modules/:drupal_version/:module_name', function (req, res){
+  .get('/modules/:drupal_version?/:module_name', function (req, res){
     exec('git ls-remote http://git.drupal.org/project/' + req.params.module_name + '.git', function(error, stdout, stderr) {
+      if (error) {
+        return res
+                .status(500)
+                .send({e:[error,stderr]});
+      }
       var refs,
           tags = [];
       refs  = stdout
@@ -23,12 +28,29 @@ app
       refs.pop();
       _.each(refs, function (tag) {
         tag = tag.split('\t')[1].split('/')[2];
-        if (tag != undefined && tag.lastIndexOf(req.params.drupal_version, 0) === 0) {
-          tags.push(tag.split('^{}')[0]);
+        if (tag != undefined) {
+          if (!req.params.drupal_version) {
+            tags.push(tag.split('^{}')[0]);
+          }
+          else if (tag.lastIndexOf(req.params.drupal_version, 0) === 0) {
+            tags.push(tag.split('^{}')[0]);
+          }
         }
       });
-      res.json(tags);
+      return res.json(tags);
     });
+  })
+  .get('/drush/:drupal_version/:module_name', function (req, res) {
+    exec('`which drush` rl --format=json ' + req.params.module_name, function (error, stdout, stderr) {
+      if (error) {
+        return res
+                .status(500)
+                .send({e:[error,stderr]});
+      }
+
+      return res.json(JSON.parse(stdout));
+
+    })
   })
   .get('/', function (req, res) {
     res
