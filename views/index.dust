@@ -1,0 +1,846 @@
+
+<!doctype html>
+
+<!--[if lt IE 7 ]> <html lang="en" class="no-js ie6"> <![endif]-->
+<!--[if IE 7 ]>    <html lang="en" class="no-js ie7"> <![endif]-->
+<!--[if IE 8 ]>    <html lang="en" class="no-js ie8"> <![endif]-->
+<!--[if IE 9 ]>    <html lang="en" class="no-js ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html lang="en" class="no-js"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  <title>Drush Make Generator ❤ a UI to Customize Drupal Installs</title>
+  <meta name="description" content="http://drushmake.me helps you build install profiles or quickly install Drupal using drush make. Powered by Four Kitchens. ">
+  <meta name="author" content="Chris Ruppel">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="/favicon.ico">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+  <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Droid+Sans">
+  <link rel="stylesheet" href="/css/960.css" media="only all and (min-width: 960px)">
+  <link rel="stylesheet" href="/css/formalize.css" media="only screen and (min-width: 481px)">
+  <link rel="stylesheet" href="/css/style.css" media="all">
+
+</head>
+
+<body class="container_12">
+
+  <header class="grid_12">
+    <h1>Drush Make Generator</h1>
+    <nav>
+      <ol>
+        <li><a href="/#what" id="huh">what's going on?</a></li>
+        <li><a href="/#generate" id="gen">generate</a></li>
+        <li><a href="http://drupal.org/project/drush_make" id="make">make</a></li>
+      </ol>
+    </nav>
+  </header>
+
+  <div class="grid_6" id="what">
+    <h2>What is a makefile?</h2>
+    <p>A makefile is a <strong>macro for installing Drupal</strong>. It contains a list of files that can be fetched using the power of <strong title="Grayskull">drush</strong>, the command line tool for administering Drupal.</p>
+    <p>Using this generator you can specify different Drupal core <strong>distributions</strong>, <strong>modules</strong>, <strong>themes</strong>, and external <strong>libraries</strong> like jQuery or WYSIWYG editors.</p>
+    <p>The end result is a small text file containing the DNA for a specific Drupal setup &mdash; <strong>YOUR perfect setup</strong>!</p>
+  </div>
+
+  <div class="grid_6" id="need">
+    <h2>You need Drush Make if...</h2>
+    <ul>
+      <li>You're tired of <strong>installing Drupal modules over and over</strong>.</li>
+      <li>You find yourself wishing you could <strong>start with every module you need</strong> already installed.</li>
+      <li>You <strong>build a specific type of site regularly</strong>, such as communities, a blog, or an ecommerce website.</li>
+    </ul>
+    <a href="#generate" class="ready">LET ME TRY IT!!</a>
+  </div>
+
+  <div class="grid_12" id="generate">
+    <h2>Customize your makefile</h2>
+    <form id="generateForm" action="/" method="post">
+
+      <fieldset id="fs-version">
+        <legend><p>Drupal Version <span class="small">Since different modules and themes are available for each major version<br /> of Drupal, the form will be <strong>reset</strong> if you change this setting.</span></p></legend>
+        <label for="o-version6"><input id="o-version6" type="radio" name="makefile[version]" value="6"  /> <span class="title">Drupal 6</span></label>
+        <label for="o-version7"><input id="o-version7" type="radio" name="makefile[version]" value="7" checked="checked"/> <span class="title">Drupal 7</span></label>
+      </fieldset>
+      <div id="generator">
+        <fieldset class="fs-core">
+          <legend><p>Drupal core or distribution</p></legend>
+          <label for="drupal-stable">
+            <input id="drupal-stable" type="radio" name="makefile[core]" value="drupal" checked /> <span class="title">Drupal core</span>
+          </label>
+
+          <label for="pressflow-stable">
+            <input id="pressflow-stable" type="radio" name="makefile[core]" value="pressflow" /> <span class="title">Pressflow</span>
+          </label>
+        </fieldset>
+        <fieldset id="fs-contrib">
+          <legend><p>Modules</p></legend>
+          <h4>Access control</h4>
+          <label for="content_access-stable">
+            <input id="content_access-stable" type="checkbox" /> <span class="title">Content Access</span>
+            <select id="content_access" name="makefile[modules][content_access]" disabled="disabled"></select>
+          </label>
+
+          <h4>Administration</h4>
+          <label for="admin-stable">
+            <input id="admin-stable" type="checkbox" /> <span class="title">Admin</span>
+            <select id="admin" name="makefile[modules][admin]" disabled="disabled"></select>
+          </label>
+
+          <label for="admin_menu-stable">
+            <input id="admin_menu-stable" type="checkbox" /> <span class="title">Administration menu</span>
+            <select id="admin_menu" name="makefile[modules][admin_menu]" disabled="disabled"></select>
+          </label>
+
+          <label for="module_filter-stable">
+            <input id="module_filter-stable" type="checkbox" /> <span class="title">Module Filter</span>
+            <select id="module_filter" name="makefile[modules][module_filter]" disabled="disabled"></select>
+          </label>
+
+          <h4>CCK</h4>
+          <label for="contemplate-stable">
+            <input id="contemplate-stable" type="checkbox" /> <span class="title">Content Templates (Contemplate)</span>
+            <select id="contemplate" name="makefile[modules][contemplate]" disabled="disabled"></select>
+          </label>
+
+          <h4>Chaos tool suite</h4>
+          <label for="ctools-stable">
+            <input id="ctools-stable" type="checkbox" /> <span class="title">Chaos tool suite</span>
+            <select id="ctools" name="makefile[modules][ctools]" disabled="disabled"></select>
+          </label>
+
+          <h4>Context</h4>
+          <label for="context-stable">
+            <input id="context-stable" type="checkbox" /> <span class="title">Context</span>
+            <select id="context" name="makefile[modules][context]" disabled="disabled"></select>
+          </label>
+
+          <h4>Date/Time</h4>
+          <label for="calendar-stable">
+            <input id="calendar-stable" type="checkbox" /> <span class="title">Calendar</span>
+            <select id="calendar" name="makefile[modules][calendar]" disabled="disabled"></select>
+          </label>
+
+          <label for="date-stable">
+            <input id="date-stable" type="checkbox" /> <span class="title">Date</span>
+            <select id="date" name="makefile[modules][date]" disabled="disabled"></select>
+          </label>
+
+          <h4>Development</h4>
+          <label for="devel-stable">
+            <input id="devel-stable" type="checkbox" /> <span class="title">Devel</span>
+            <select id="devel" name="makefile[modules][devel]" disabled="disabled"></select>
+          </label>
+
+          <h4>Features</h4>
+          <label for="features-stable">
+            <input id="features-stable" type="checkbox" /> <span class="title">Features</span>
+            <select id="features" name="makefile[modules][features]" disabled="disabled"></select>
+          </label>
+
+          <h4>Fields</h4>
+          <label for="content_taxonomy-stable">
+            <input id="content_taxonomy-stable" type="checkbox" /> <span class="title">Content Taxonomy</span>
+            <select id="content_taxonomy" name="makefile[modules][content_taxonomy]" disabled="disabled"></select>
+          </label>
+
+          <label for="email-stable">
+            <input id="email-stable" type="checkbox" /> <span class="title">Email Field</span>
+            <select id="email" name="makefile[modules][email]" disabled="disabled"></select>
+          </label>
+
+          <label for="filefield_paths-stable">
+            <input id="filefield_paths-stable" type="checkbox" /> <span class="title">FileField Paths</span>
+            <select id="filefield_paths" name="makefile[modules][filefield_paths]" disabled="disabled"></select>
+          </label>
+
+          <label for="link-stable">
+            <input id="link-stable" type="checkbox" /> <span class="title">Link</span>
+            <select id="link" name="makefile[modules][link]" disabled="disabled"></select>
+          </label>
+
+          <h4>Flags</h4>
+          <label for="flag-stable">
+            <input id="flag-stable" type="checkbox" /> <span class="title">Flag</span>
+            <select id="flag" name="makefile[modules][flag]" disabled="disabled"></select>
+          </label>
+
+          <h4>Invite</h4>
+          <label for="invite-stable">
+            <input id="invite-stable" type="checkbox" /> <span class="title">Invite</span>
+            <select id="invite" name="makefile[modules][invite]" disabled="disabled"></select>
+          </label>
+
+          <h4>Mail</h4>
+          <label for="mimemail-stable">
+            <input id="mimemail-stable" type="checkbox" /> <span class="title">Mime Mail</span>
+            <select id="mimemail" name="makefile[modules][mimemail]" disabled="disabled"></select>
+          </label>
+
+          <label for="privatemsg-stable">
+            <input id="privatemsg-stable" type="checkbox" /> <span class="title">Privatemsg</span>
+            <select id="privatemsg" name="makefile[modules][privatemsg]" disabled="disabled"></select>
+          </label>
+
+          <label for="simplenews-stable">
+            <input id="simplenews-stable" type="checkbox" /> <span class="title">Simplenews</span>
+            <select id="simplenews" name="makefile[modules][simplenews]" disabled="disabled"></select>
+          </label>
+
+          <h4>Media</h4>
+          <label for="imce-stable">
+            <input id="imce-stable" type="checkbox" /> <span class="title">IMCE</span>
+            <select id="imce" name="makefile[modules][imce]" disabled="disabled"></select>
+          </label>
+
+          <h4>Multilingual - Internationalization</h4>
+          <label for="i18n-stable">
+            <input id="i18n-stable" type="checkbox" /> <span class="title">Internationalization</span>
+            <select id="i18n" name="makefile[modules][i18n]" disabled="disabled"></select>
+          </label>
+
+          <h4>Organic groups</h4>
+          <label for="og-stable">
+            <input id="og-stable" type="checkbox" /> <span class="title">Organic groups</span>
+            <select id="og" name="makefile[modules][og]" disabled="disabled"></select>
+          </label>
+
+          <h4>Other</h4>
+          <label for="acl-stable">
+            <input id="acl-stable" type="checkbox" /> <span class="title">ACL</span>
+            <select id="acl" name="makefile[modules][acl]" disabled="disabled"></select>
+          </label>
+
+          <label for="acquia_marina-stable">
+            <input id="acquia_marina-stable" type="checkbox" /> <span class="title">Acquia Marina</span>
+            <select id="acquia_marina" name="makefile[modules][acquia_marina]" disabled="disabled"></select>
+          </label>
+
+          <label for="adaptivetheme-stable">
+            <input id="adaptivetheme-stable" type="checkbox" /> <span class="title">AdaptiveTheme</span>
+            <select id="adaptivetheme" name="makefile[modules][adaptivetheme]" disabled="disabled"></select>
+          </label>
+
+          <label for="addtoany-stable">
+            <input id="addtoany-stable" type="checkbox" /> <span class="title">AddToAny Share/Bookmark Button</span>
+            <select id="addtoany" name="makefile[modules][addtoany]" disabled="disabled"></select>
+          </label>
+
+          <label for="advanced_forum-stable">
+            <input id="advanced_forum-stable" type="checkbox" /> <span class="title">Advanced Forum</span>
+            <select id="advanced_forum" name="makefile[modules][advanced_forum]" disabled="disabled"></select>
+          </label>
+
+          <label for="advanced_help-stable">
+            <input id="advanced_help-stable" type="checkbox" /> <span class="title">Advanced help</span>
+            <select id="advanced_help" name="makefile[modules][advanced_help]" disabled="disabled"></select>
+          </label>
+
+          <label for="analytic-stable">
+            <input id="analytic-stable" type="checkbox" /> <span class="title">Analytic</span>
+            <select id="analytic" name="makefile[modules][analytic]" disabled="disabled"></select>
+          </label>
+
+          <label for="author_pane-stable">
+            <input id="author_pane-stable" type="checkbox" /> <span class="title">Author Pane</span>
+            <select id="author_pane" name="makefile[modules][author_pane]" disabled="disabled"></select>
+          </label>
+
+          <label for="auto_nodetitle-stable">
+            <input id="auto_nodetitle-stable" type="checkbox" /> <span class="title">Automatic Nodetitles</span>
+            <select id="auto_nodetitle" name="makefile[modules][auto_nodetitle]" disabled="disabled"></select>
+          </label>
+
+          <label for="backup_migrate-stable">
+            <input id="backup_migrate-stable" type="checkbox" /> <span class="title">Backup and Migrate</span>
+            <select id="backup_migrate" name="makefile[modules][backup_migrate]" disabled="disabled"></select>
+          </label>
+
+          <label for="basic-stable">
+            <input id="basic-stable" type="checkbox" /> <span class="title">Basic</span>
+            <select id="basic" name="makefile[modules][basic]" disabled="disabled"></select>
+          </label>
+
+          <label for="better_formats-stable">
+            <input id="better_formats-stable" type="checkbox" /> <span class="title">Better Formats</span>
+            <select id="better_formats" name="makefile[modules][better_formats]" disabled="disabled"></select>
+          </label>
+
+          <label for="blueprint-stable">
+            <input id="blueprint-stable" type="checkbox" /> <span class="title">Blueprint</span>
+            <select id="blueprint" name="makefile[modules][blueprint]" disabled="disabled"></select>
+          </label>
+
+          <label for="boxes-stable">
+            <input id="boxes-stable" type="checkbox" /> <span class="title">Boxes</span>
+            <select id="boxes" name="makefile[modules][boxes]" disabled="disabled"></select>
+          </label>
+
+          <label for="captcha-stable">
+            <input id="captcha-stable" type="checkbox" /> <span class="title">CAPTCHA</span>
+            <select id="captcha" name="makefile[modules][captcha]" disabled="disabled"></select>
+          </label>
+
+          <label for="cck-stable">
+            <input id="cck-stable" type="checkbox" /> <span class="title">Content Construction Kit (CCK)</span>
+            <select id="cck" name="makefile[modules][cck]" disabled="disabled"></select>
+          </label>
+
+          <label for="comment_notify-stable">
+            <input id="comment_notify-stable" type="checkbox" /> <span class="title">Comment Notify</span>
+            <select id="comment_notify" name="makefile[modules][comment_notify]" disabled="disabled"></select>
+          </label>
+
+          <label for="computed_field-stable">
+            <input id="computed_field-stable" type="checkbox" /> <span class="title">Computed Field</span>
+            <select id="computed_field" name="makefile[modules][computed_field]" disabled="disabled"></select>
+          </label>
+
+          <label for="context_admin-stable">
+            <input id="context_admin-stable" type="checkbox" /> <span class="title">Contextual Administration</span>
+            <select id="context_admin" name="makefile[modules][context_admin]" disabled="disabled"></select>
+          </label>
+
+          <label for="custom_breadcrumbs-stable">
+            <input id="custom_breadcrumbs-stable" type="checkbox" /> <span class="title">Custom Breadcrumbs</span>
+            <select id="custom_breadcrumbs" name="makefile[modules][custom_breadcrumbs]" disabled="disabled"></select>
+          </label>
+
+          <label for="dhtml_menu-stable">
+            <input id="dhtml_menu-stable" type="checkbox" /> <span class="title">DHTML Menu</span>
+            <select id="dhtml_menu" name="makefile[modules][dhtml_menu]" disabled="disabled"></select>
+          </label>
+
+          <label for="diff-stable">
+            <input id="diff-stable" type="checkbox" /> <span class="title">Diff</span>
+            <select id="diff" name="makefile[modules][diff]" disabled="disabled"></select>
+          </label>
+
+          <label for="ds-stable">
+            <input id="ds-stable" type="checkbox" /> <span class="title">Display Suite</span>
+            <select id="ds" name="makefile[modules][ds]" disabled="disabled"></select>
+          </label>
+
+          <label for="elements-stable">
+            <input id="elements-stable" type="checkbox" /> <span class="title">Elements</span>
+            <select id="elements" name="makefile[modules][elements]" disabled="disabled"></select>
+          </label>
+
+          <label for="entity-stable">
+            <input id="entity-stable" type="checkbox" /> <span class="title">Entity API</span>
+            <select id="entity" name="makefile[modules][entity]" disabled="disabled"></select>
+          </label>
+
+          <label for="entityreference-stable">
+            <input id="entityreference-stable" type="checkbox" /> <span class="title">Entity reference</span>
+            <select id="entityreference" name="makefile[modules][entityreference]" disabled="disabled"></select>
+          </label>
+
+          <label for="faq-stable">
+            <input id="faq-stable" type="checkbox" /> <span class="title">Frequently Asked Questions</span>
+            <select id="faq" name="makefile[modules][faq]" disabled="disabled"></select>
+          </label>
+
+          <label for="feeds-stable">
+            <input id="feeds-stable" type="checkbox" /> <span class="title">Feeds</span>
+            <select id="feeds" name="makefile[modules][feeds]" disabled="disabled"></select>
+          </label>
+
+          <label for="field_group-stable">
+            <input id="field_group-stable" type="checkbox" /> <span class="title">Field group</span>
+            <select id="field_group" name="makefile[modules][field_group]" disabled="disabled"></select>
+          </label>
+
+          <label for="framework-stable">
+            <input id="framework-stable" type="checkbox" /> <span class="title">Framework</span>
+            <select id="framework" name="makefile[modules][framework]" disabled="disabled"></select>
+          </label>
+
+          <label for="front-stable">
+            <input id="front-stable" type="checkbox" /> <span class="title">Front Page</span>
+            <select id="front" name="makefile[modules][front]" disabled="disabled"></select>
+          </label>
+
+          <label for="fusion-stable">
+            <input id="fusion-stable" type="checkbox" /> <span class="title">Fusion</span>
+            <select id="fusion" name="makefile[modules][fusion]" disabled="disabled"></select>
+          </label>
+
+          <label for="genesis-stable">
+            <input id="genesis-stable" type="checkbox" /> <span class="title">Genesis</span>
+            <select id="genesis" name="makefile[modules][genesis]" disabled="disabled"></select>
+          </label>
+
+          <label for="getid3-stable">
+            <input id="getid3-stable" type="checkbox" /> <span class="title">getID3()</span>
+            <select id="getid3" name="makefile[modules][getid3]" disabled="disabled"></select>
+          </label>
+
+          <label for="globalredirect-stable">
+            <input id="globalredirect-stable" type="checkbox" /> <span class="title">Global Redirect</span>
+            <select id="globalredirect" name="makefile[modules][globalredirect]" disabled="disabled"></select>
+          </label>
+
+          <label for="gmap-stable">
+            <input id="gmap-stable" type="checkbox" /> <span class="title">GMap Module</span>
+            <select id="gmap" name="makefile[modules][gmap]" disabled="disabled"></select>
+          </label>
+
+          <label for="google_analytics-stable">
+            <input id="google_analytics-stable" type="checkbox" /> <span class="title">Google Analytics</span>
+            <select id="google_analytics" name="makefile[modules][google_analytics]" disabled="disabled"></select>
+          </label>
+
+          <label for="html5_base-stable">
+            <input id="html5_base-stable" type="checkbox" /> <span class="title">HTML5 Base</span>
+            <select id="html5_base" name="makefile[modules][html5_base]" disabled="disabled"></select>
+          </label>
+
+          <label for="html5_tools-stable">
+            <input id="html5_tools-stable" type="checkbox" /> <span class="title">HTML5 Tools</span>
+            <select id="html5_tools" name="makefile[modules][html5_tools]" disabled="disabled"></select>
+          </label>
+
+          <label for="image-stable">
+            <input id="image-stable" type="checkbox" /> <span class="title">Image</span>
+            <select id="image" name="makefile[modules][image]" disabled="disabled"></select>
+          </label>
+
+          <label for="imageapi-stable">
+            <input id="imageapi-stable" type="checkbox" /> <span class="title">ImageAPI</span>
+            <select id="imageapi" name="makefile[modules][imageapi]" disabled="disabled"></select>
+          </label>
+
+          <label for="imagecache_actions-stable">
+            <input id="imagecache_actions-stable" type="checkbox" /> <span class="title">ImageCache Actions</span>
+            <select id="imagecache_actions" name="makefile[modules][imagecache_actions]" disabled="disabled"></select>
+          </label>
+
+          <label for="imagecache_profiles-stable">
+            <input id="imagecache_profiles-stable" type="checkbox" /> <span class="title">ImageCache Profiles</span>
+            <select id="imagecache_profiles" name="makefile[modules][imagecache_profiles]" disabled="disabled"></select>
+          </label>
+
+          <label for="insert-stable">
+            <input id="insert-stable" type="checkbox" /> <span class="title">Insert</span>
+            <select id="insert" name="makefile[modules][insert]" disabled="disabled"></select>
+          </label>
+
+          <label for="jquery_ui-stable">
+            <input id="jquery_ui-stable" type="checkbox" /> <span class="title">jQuery UI</span>
+            <select id="jquery_ui" name="makefile[modules][jquery_ui]" disabled="disabled"></select>
+          </label>
+
+          <label for="libraries-stable">
+            <input id="libraries-stable" type="checkbox" /> <span class="title">Libraries API</span>
+            <select id="libraries" name="makefile[modules][libraries]" disabled="disabled"></select>
+          </label>
+
+          <label for="location-stable">
+            <input id="location-stable" type="checkbox" /> <span class="title">Location</span>
+            <select id="location" name="makefile[modules][location]" disabled="disabled"></select>
+          </label>
+
+          <label for="logintoboggan-stable">
+            <input id="logintoboggan-stable" type="checkbox" /> <span class="title">LoginToboggan</span>
+            <select id="logintoboggan" name="makefile[modules][logintoboggan]" disabled="disabled"></select>
+          </label>
+
+          <label for="login_destination-stable">
+            <input id="login_destination-stable" type="checkbox" /> <span class="title">Login Destination</span>
+            <select id="login_destination" name="makefile[modules][login_destination]" disabled="disabled"></select>
+          </label>
+
+          <label for="marinelli-stable">
+            <input id="marinelli-stable" type="checkbox" /> <span class="title">Marinelli</span>
+            <select id="marinelli" name="makefile[modules][marinelli]" disabled="disabled"></select>
+          </label>
+
+          <label for="menu_block-stable">
+            <input id="menu_block-stable" type="checkbox" /> <span class="title">Menu block</span>
+            <select id="menu_block" name="makefile[modules][menu_block]" disabled="disabled"></select>
+          </label>
+
+          <label for="menu_breadcrumb-stable">
+            <input id="menu_breadcrumb-stable" type="checkbox" /> <span class="title">Menu Breadcrumb</span>
+            <select id="menu_breadcrumb" name="makefile[modules][menu_breadcrumb]" disabled="disabled"></select>
+          </label>
+
+          <label for="menu_minipanels-stable">
+            <input id="menu_minipanels-stable" type="checkbox" /> <span class="title">Menu minipanels</span>
+            <select id="menu_minipanels" name="makefile[modules][menu_minipanels]" disabled="disabled"></select>
+          </label>
+
+          <label for="messaging-stable">
+            <input id="messaging-stable" type="checkbox" /> <span class="title">Messaging</span>
+            <select id="messaging" name="makefile[modules][messaging]" disabled="disabled"></select>
+          </label>
+
+          <label for="mix_and_match-stable">
+            <input id="mix_and_match-stable" type="checkbox" /> <span class="title">Mix and Match</span>
+            <select id="mix_and_match" name="makefile[modules][mix_and_match]" disabled="disabled"></select>
+          </label>
+
+          <label for="modernizr-stable">
+            <input id="modernizr-stable" type="checkbox" /> <span class="title">Modernizr</span>
+            <select id="modernizr" name="makefile[modules][modernizr]" disabled="disabled"></select>
+          </label>
+
+          <label for="module_builder-stable">
+            <input id="module_builder-stable" type="checkbox" /> <span class="title">Module Builder</span>
+            <select id="module_builder" name="makefile[modules][module_builder]" disabled="disabled"></select>
+          </label>
+
+          <label for="mollom-stable">
+            <input id="mollom-stable" type="checkbox" /> <span class="title">Mollom</span>
+            <select id="mollom" name="makefile[modules][mollom]" disabled="disabled"></select>
+          </label>
+
+          <label for="mothership-stable">
+            <input id="mothership-stable" type="checkbox" /> <span class="title">mothership</span>
+            <select id="mothership" name="makefile[modules][mothership]" disabled="disabled"></select>
+          </label>
+
+          <label for="newswire-stable">
+            <input id="newswire-stable" type="checkbox" /> <span class="title">Newswire</span>
+            <select id="newswire" name="makefile[modules][newswire]" disabled="disabled"></select>
+          </label>
+
+          <label for="nice_menus-stable">
+            <input id="nice_menus-stable" type="checkbox" /> <span class="title">Nice Menus</span>
+            <select id="nice_menus" name="makefile[modules][nice_menus]" disabled="disabled"></select>
+          </label>
+
+          <label for="ninesixty-stable">
+            <input id="ninesixty-stable" type="checkbox" /> <span class="title">NineSixty (960 Grid System)</span>
+            <select id="ninesixty" name="makefile[modules][ninesixty]" disabled="disabled"></select>
+          </label>
+
+          <label for="nitobe-stable">
+            <input id="nitobe-stable" type="checkbox" /> <span class="title">Nitobe</span>
+            <select id="nitobe" name="makefile[modules][nitobe]" disabled="disabled"></select>
+          </label>
+
+          <label for="nodequeue-stable">
+            <input id="nodequeue-stable" type="checkbox" /> <span class="title">Nodequeue</span>
+            <select id="nodequeue" name="makefile[modules][nodequeue]" disabled="disabled"></select>
+          </label>
+
+          <label for="nodereference_url-stable">
+            <input id="nodereference_url-stable" type="checkbox" /> <span class="title">Node Reference URL Widget</span>
+            <select id="nodereference_url" name="makefile[modules][nodereference_url]" disabled="disabled"></select>
+          </label>
+
+          <label for="node_clone-stable">
+            <input id="node_clone-stable" type="checkbox" /> <span class="title">Node clone</span>
+            <select id="node_clone" name="makefile[modules][node_clone]" disabled="disabled"></select>
+          </label>
+
+          <label for="notifications-stable">
+            <input id="notifications-stable" type="checkbox" /> <span class="title">Notifications</span>
+            <select id="notifications" name="makefile[modules][notifications]" disabled="disabled"></select>
+          </label>
+
+          <label for="omega-stable">
+            <input id="omega-stable" type="checkbox" /> <span class="title">Omega</span>
+            <select id="omega" name="makefile[modules][omega]" disabled="disabled"></select>
+          </label>
+
+          <label for="panelizer-stable">
+            <input id="panelizer-stable" type="checkbox" /> <span class="title">Panelizer</span>
+            <select id="panelizer" name="makefile[modules][panelizer]" disabled="disabled"></select>
+          </label>
+
+          <label for="pathauto-stable">
+            <input id="pathauto-stable" type="checkbox" /> <span class="title">Pathauto</span>
+            <select id="pathauto" name="makefile[modules][pathauto]" disabled="disabled"></select>
+          </label>
+
+          <label for="path_redirect-stable">
+            <input id="path_redirect-stable" type="checkbox" /> <span class="title">Path redirect</span>
+            <select id="path_redirect" name="makefile[modules][path_redirect]" disabled="disabled"></select>
+          </label>
+
+          <label for="poormanscron-stable">
+            <input id="poormanscron-stable" type="checkbox" /> <span class="title">Poormanscron</span>
+            <select id="poormanscron" name="makefile[modules][poormanscron]" disabled="disabled"></select>
+          </label>
+
+          <label for="quicktabs-stable">
+            <input id="quicktabs-stable" type="checkbox" /> <span class="title">Quick Tabs</span>
+            <select id="quicktabs" name="makefile[modules][quicktabs]" disabled="disabled"></select>
+          </label>
+
+          <label for="references-stable">
+            <input id="references-stable" type="checkbox" /> <span class="title">References</span>
+            <select id="references" name="makefile[modules][references]" disabled="disabled"></select>
+          </label>
+
+          <label for="relation-stable">
+            <input id="relation-stable" type="checkbox" /> <span class="title">Relation</span>
+            <select id="relation" name="makefile[modules][relation]" disabled="disabled"></select>
+          </label>
+
+          <label for="responder-stable">
+            <input id="responder-stable" type="checkbox" /> <span class="title">Responder</span>
+            <select id="responder" name="makefile[modules][responder]" disabled="disabled"></select>
+          </label>
+
+          <label for="responsive_images-stable">
+            <input id="responsive_images-stable" type="checkbox" /> <span class="title">Responsive Images</span>
+            <select id="responsive_images" name="makefile[modules][responsive_images]" disabled="disabled"></select>
+          </label>
+
+          <label for="rootcandy-stable">
+            <input id="rootcandy-stable" type="checkbox" /> <span class="title">RootCandy</span>
+            <select id="rootcandy" name="makefile[modules][rootcandy]" disabled="disabled"></select>
+          </label>
+
+          <label for="rubik-stable">
+            <input id="rubik-stable" type="checkbox" /> <span class="title">Rubik</span>
+            <select id="rubik" name="makefile[modules][rubik]" disabled="disabled"></select>
+          </label>
+
+          <label for="scheduler-stable">
+            <input id="scheduler-stable" type="checkbox" /> <span class="title">Scheduler</span>
+            <select id="scheduler" name="makefile[modules][scheduler]" disabled="disabled"></select>
+          </label>
+
+          <label for="search404-stable">
+            <input id="search404-stable" type="checkbox" /> <span class="title">Search 404</span>
+            <select id="search404" name="makefile[modules][search404]" disabled="disabled"></select>
+          </label>
+
+          <label for="securepages-stable">
+            <input id="securepages-stable" type="checkbox" /> <span class="title">Secure Pages</span>
+            <select id="securepages" name="makefile[modules][securepages]" disabled="disabled"></select>
+          </label>
+
+          <label for="service_links-stable">
+            <input id="service_links-stable" type="checkbox" /> <span class="title">Service links</span>
+            <select id="service_links" name="makefile[modules][service_links]" disabled="disabled"></select>
+          </label>
+
+          <label for="site_map-stable">
+            <input id="site_map-stable" type="checkbox" /> <span class="title">Site map</span>
+            <select id="site_map" name="makefile[modules][site_map]" disabled="disabled"></select>
+          </label>
+
+          <label for="site_verify-stable">
+            <input id="site_verify-stable" type="checkbox" /> <span class="title">Site verification</span>
+            <select id="site_verify" name="makefile[modules][site_verify]" disabled="disabled"></select>
+          </label>
+
+          <label for="sky-stable">
+            <input id="sky-stable" type="checkbox" /> <span class="title">Sky</span>
+            <select id="sky" name="makefile[modules][sky]" disabled="disabled"></select>
+          </label>
+
+          <label for="smtp-stable">
+            <input id="smtp-stable" type="checkbox" /> <span class="title">SMTP Authentication Support</span>
+            <select id="smtp" name="makefile[modules][smtp]" disabled="disabled"></select>
+          </label>
+
+          <label for="stringoverrides-stable">
+            <input id="stringoverrides-stable" type="checkbox" /> <span class="title">String Overrides</span>
+            <select id="stringoverrides" name="makefile[modules][stringoverrides]" disabled="disabled"></select>
+          </label>
+
+          <label for="strongarm-stable">
+            <input id="strongarm-stable" type="checkbox" /> <span class="title">Strongarm</span>
+            <select id="strongarm" name="makefile[modules][strongarm]" disabled="disabled"></select>
+          </label>
+
+          <label for="tao-stable">
+            <input id="tao-stable" type="checkbox" /> <span class="title">Tao</span>
+            <select id="tao" name="makefile[modules][tao]" disabled="disabled"></select>
+          </label>
+
+          <label for="token-stable">
+            <input id="token-stable" type="checkbox" /> <span class="title">Token</span>
+            <select id="token" name="makefile[modules][token]" disabled="disabled"></select>
+          </label>
+
+          <label for="transliteration-stable">
+            <input id="transliteration-stable" type="checkbox" /> <span class="title">Transliteration</span>
+            <select id="transliteration" name="makefile[modules][transliteration]" disabled="disabled"></select>
+          </label>
+
+          <label for="ubercart-stable">
+            <input id="ubercart-stable" type="checkbox" /> <span class="title">Ubercart</span>
+            <select id="ubercart" name="makefile[modules][ubercart]" disabled="disabled"></select>
+          </label>
+
+          <label for="zen-stable">
+            <input id="zen-stable" type="checkbox" /> <span class="title">Zen</span>
+            <select id="zen" name="makefile[modules][zen]" disabled="disabled"></select>
+          </label>
+
+          <h4>Panels</h4>
+          <label for="panels-stable">
+            <input id="panels-stable" type="checkbox" /> <span class="title">Panels</span>
+            <select id="panels" name="makefile[modules][panels]" disabled="disabled"></select>
+          </label>
+
+          <h4>Printer, email and PDF versions</h4>
+          <label for="print-stable">
+            <input id="print-stable" type="checkbox" /> <span class="title">Printer, e-mail and PDF versions</span>
+            <select id="print" name="makefile[modules][print]" disabled="disabled"></select>
+          </label>
+
+          <h4>Rules</h4>
+          <label for="rules-stable">
+            <input id="rules-stable" type="checkbox" /> <span class="title">Rules</span>
+            <select id="rules" name="makefile[modules][rules]" disabled="disabled"></select>
+          </label>
+
+          <h4>SEO</h4>
+          <label for="page_title-stable">
+            <input id="page_title-stable" type="checkbox" /> <span class="title">Page Title</span>
+            <select id="page_title" name="makefile[modules][page_title]" disabled="disabled"></select>
+          </label>
+
+          <h4>Skinr</h4>
+          <label for="skinr-stable">
+            <input id="skinr-stable" type="checkbox" /> <span class="title">Skinr</span>
+            <select id="skinr" name="makefile[modules][skinr]" disabled="disabled"></select>
+          </label>
+
+          <h4>Spam control</h4>
+          <label for="recaptcha-stable">
+            <input id="recaptcha-stable" type="checkbox" /> <span class="title">reCAPTCHA</span>
+            <select id="recaptcha" name="makefile[modules][recaptcha]" disabled="disabled"></select>
+          </label>
+
+          <h4>Taxonomy</h4>
+          <label for="taxonomy_manager-stable">
+            <input id="taxonomy_manager-stable" type="checkbox" /> <span class="title">Taxonomy Manager</span>
+            <select id="taxonomy_manager" name="makefile[modules][taxonomy_manager]" disabled="disabled"></select>
+          </label>
+
+          <h4>Taxonomy Menu</h4>
+          <label for="taxonomy_menu-stable">
+            <input id="taxonomy_menu-stable" type="checkbox" /> <span class="title">Taxonomy Menu</span>
+            <select id="taxonomy_menu" name="makefile[modules][taxonomy_menu]" disabled="disabled"></select>
+          </label>
+
+          <h4>User interface</h4>
+          <label for="ckeditor-stable">
+            <input id="ckeditor-stable" type="checkbox" /> <span class="title">CKEditor - WYSIWYG HTML editor</span>
+            <select id="ckeditor" name="makefile[modules][ckeditor]" disabled="disabled"></select>
+          </label>
+
+          <label for="extlink-stable">
+            <input id="extlink-stable" type="checkbox" /> <span class="title">External Links</span>
+            <select id="extlink" name="makefile[modules][extlink]" disabled="disabled"></select>
+          </label>
+
+          <label for="imce_wysiwyg-stable">
+            <input id="imce_wysiwyg-stable" type="checkbox" /> <span class="title">IMCE Wysiwyg bridge</span>
+            <select id="imce_wysiwyg" name="makefile[modules][imce_wysiwyg]" disabled="disabled"></select>
+          </label>
+
+          <label for="jquery_plugin-stable">
+            <input id="jquery_plugin-stable" type="checkbox" /> <span class="title">jQuery plugins</span>
+            <select id="jquery_plugin" name="makefile[modules][jquery_plugin]" disabled="disabled"></select>
+          </label>
+
+          <label for="jquery_update-stable">
+            <input id="jquery_update-stable" type="checkbox" /> <span class="title">jQuery Update</span>
+            <select id="jquery_update" name="makefile[modules][jquery_update]" disabled="disabled"></select>
+          </label>
+
+          <label for="wysiwyg-stable">
+            <input id="wysiwyg-stable" type="checkbox" /> <span class="title">Wysiwyg</span>
+            <select id="wysiwyg" name="makefile[modules][wysiwyg]" disabled="disabled"></select>
+          </label>
+
+          <h4>Views</h4>
+          <label for="views-stable">
+            <input id="views-stable" type="checkbox" /> <span class="title">Views</span>
+            <select id="views" name="makefile[modules][views]" disabled="disabled"></select>
+          </label>
+
+          <label for="views_bulk_operations-stable">
+            <input id="views_bulk_operations-stable" type="checkbox" /> <span class="title">Views Bulk Operations (VBO)</span>
+            <select id="views_bulk_operations" name="makefile[modules][views_bulk_operations]" disabled="disabled"></select>
+          </label>
+
+          <label for="views_slideshow-stable">
+            <input id="views_slideshow-stable" type="checkbox" /> <span class="title">Views Slideshow</span>
+            <select id="views_slideshow" name="makefile[modules][views_slideshow]" disabled="disabled"></select>
+          </label>
+
+          <h4>Voting</h4>
+          <label for="fivestar-stable">
+            <input id="fivestar-stable" type="checkbox" /> <span class="title">Fivestar</span>
+            <select id="fivestar" name="makefile[modules][fivestar]" disabled="disabled"></select>
+          </label>
+
+          <label for="votingapi-stable">
+            <input id="votingapi-stable" type="checkbox" /> <span class="title">Voting API</span>
+            <select id="votingapi" name="makefile[modules][votingapi]" disabled="disabled"></select>
+          </label>
+
+          <h4>Webform</h4>
+          <label for="webform-stable">
+            <input id="webform-stable" type="checkbox" /> <span class="title">Webform</span>
+            <select id="webform" name="makefile[modules][webform]" disabled="disabled"></select>
+          </label>
+
+          <h4>XML sitemap</h4>
+          <label for="xmlsitemap-stable">
+            <input id="xmlsitemap-stable" type="checkbox" /> <span class="title">XML sitemap</span>
+            <select id="xmlsitemap" name="makefile[modules][xmlsitemap]" disabled="disabled"></select>
+          </label>
+          <div class="modules downloads"><div class="download label"><a class="remove">remove</a><select name="makefile[modules][|THIS|][type]" class="type"><option value="drupal">drupal.org/project/</option><option value="file">www</option><option value="git">git</option></select><input type="text" class="unique" name="makefile[modules][|THIS|][unique]" placeholder="module" /> <input type="text" class="url" name="makefile[modules][|THIS|][url]" placeholder="#url" disabled="disabled" /><input type="hidden" name="makefile[modules][|THIS|][maketype]" value="module" /></div></div><a class="another">Add Another</a></fieldset>
+          <fieldset id="fs-themes">
+            <legend><p>Themes</p></legend><div class="themes downloads"><div class="download label"><a class="remove">remove</a><select name="makefile[themes][|THIS|][type]" class="type"><option value="drupal">drupal.org/project/</option><option value="file">www</option><option value="git">git</option></select><input type="text" class="unique" name="makefile[themes][|THIS|][unique]" placeholder="theme" /> <input type="text" class="url" name="makefile[themes][|THIS|][url]" placeholder="#url" disabled="disabled" /><input type="hidden" name="makefile[themes][|THIS|][maketype]" value="theme" /></div></div><a class="another">Add Another</a></fieldset>
+            <fieldset id="fs-libs">
+              <legend><p>Libraries</p></legend>
+              <label for="html5bp-stable">
+                <input id="html5bp-stable" type="checkbox" name="makefile[libs][html5bp]" value="http://github.com/h5bp/html5-boilerplate/zipball/v3.0.2stripped" /> <span class="title">HTML5 Boilerplate</span>
+                <select id="html5bp" name="makefile[libs][html5bp]" disabled="disabled">
+                 <option value="http://github.com/h5bp/html5-boilerplate/zipball/v3.0.2stripped">Latest (3.0.2)</option></select>
+               </label>
+
+               <label for="jquery-stable">
+                <input id="jquery-stable" type="checkbox" name="makefile[libs][jquery]" value="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" /> <span class="title">jQuery</span>
+                <select id="jquery" name="makefile[libs][jquery]" disabled="disabled">
+                 <option value="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js">Latest (1.7.2)</option> <option value="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js">Use 1.4.4</option> <option value="https://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js">Use 1.3.2</option></select>
+               </label>
+
+               <label for="jqueryui-stable">
+                <input id="jqueryui-stable" type="checkbox" name="makefile[libs][jqueryui]" value="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js" /> <span class="title">jQuery UI</span>
+                <select id="jqueryui" name="makefile[libs][jqueryui]" disabled="disabled">
+                 <option value="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js">Latest (1.8.18)</option></select>
+               </label>
+               <div class="libraries downloads"><div class="download label"><a class="remove">remove</a><select name="makefile[libs][|THIS|][type]" class="type"><option value="file">www</option><option value="git">git</option></select><input type="text" class="unique" name="makefile[libs][|THIS|][unique]" placeholder="library" /> <input type="text" class="url" name="makefile[libs][|THIS|][url]" placeholder="#url" /><input type="hidden" name="makefile[libs][|THIS|][maketype]" value="libraries" /></div></div><a class="another">Add Another</a></fieldset>
+               <fieldset id="fs-opts">
+                <legend><p>Options</p></legend><h4>Put modules in: </h4>
+                <label for="o-contribdir">
+                  /sites/all/modules/
+                  <input id="o-contribdir" type="text" name="makefile[opts][contrib_dir]" placeholder="" />
+                </label></fieldset>      </div>
+
+                <button type="submit">Generate makefile</button>
+              </form>
+            </div>
+
+            <div class="grid_12" id="deploy">
+              <h2>Deploy your makefile</h2>
+              <p><a href="http://drupal.org/project/drush">Drush</a> and <a href="http://drupal.org/project/drush_make">Drush Make</a> turn your makefile into a Drupal installation. Then you can get building!</p>
+            </div>
+
+            <footer class="grid_12 vcard">
+              <p class="github">Source code on <a href="https://github.com/rupl/drush_make_generator" title="drush_make_generator on github">github</a></p>
+              <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a>
+              <a class="fn org url" href="http://fourkitchens.com" title="Four Kitchens">Powered by Four Kitchens</a>
+            </footer>
+            <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+            <script type="text/javascript" src="js/control.js"></script>
+            <script type="text/javascript">control.init();</script>
+          </body>
+          </html>
