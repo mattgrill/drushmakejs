@@ -29,10 +29,7 @@ app
       _.each(refs, function (tag) {
         tag = tag.split('\t')[1].split('/')[2];
         if (tag != undefined) {
-          if (!req.params.drupal_version) {
-            tags.push(tag.split('^{}')[0]);
-          }
-          else if (tag.lastIndexOf(req.params.drupal_version, 0) === 0) {
+          if (!req.params.drupal_version || tag.lastIndexOf(req.params.drupal_version, 0) === 0) {
             tags.push(tag.split('^{}')[0]);
           }
         }
@@ -40,7 +37,7 @@ app
       return res.json(tags);
     });
   })
-  .get('/drush/:drupal_version/:module_name', function (req, res) {
+  .get('/drush/:drupal_version?/:module_name', function (req, res) {
     exec('`which drush` rl --format=json ' + req.params.module_name, function (error, stdout, stderr) {
       if (error) {
         return res
