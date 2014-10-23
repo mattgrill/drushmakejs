@@ -1,6 +1,6 @@
 # Drush Make, from Node.js?
 
-Obviously, huge thanks to @rupl for the original idea, all of the front-end, the list of modules, the css.
+Obviously, huge thanks to [@rupl](https://github.com/rupl) for the original idea, all of the front-end, the list of modules, the css.
 
 Actually, everything except for this Node.js code.
 
