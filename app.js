@@ -14,7 +14,7 @@ app
   .use(bodyParser.json({extended: true}))
   .use(express.static(__dirname + '/public'))
   .get('/modules/:drupal_version?/:module_name', function (req, res){
-    exec('git ls-remote http://git.drupal.org/project/' + req.params.module_name + '.git', function(error, stdout, stderr) {
+    exec('`which git` ls-remote http://git.drupal.org/project/' + req.params.module_name + '.git', function(error, stdout, stderr) {
       if (error) {
         return res
                 .status(500)
