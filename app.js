@@ -4,6 +4,7 @@ var express         = require('express'),
     bodyParser      = require('body-parser'),
     dustjs          = require('adaro'),
     _               = require('underscore'),
+    https           = require('https'),
     exec            = require('child_process').exec;
 
 app
@@ -48,6 +49,30 @@ app
       return res.json(JSON.parse(stdout));
 
     })
+  })
+  .get('/name/:module_name', function (req, res) {
+    var options = {
+        hostname: 'www.drupal.org',
+        port: 443,
+        path: '/project/' + req.params.module_name,
+        method:  'GET'
+    };
+    var str = '';
+    var request = https.request(options, function(result) {
+        if (result.statusCode == 200) {
+            result.on('data', function(chunk) {
+                str += chunk;
+            });
+            result.on('end', function() {
+                var title = str.match(/<h1\b[^>]*>(.*?)<\/h1>/)[1];
+                res.send(title);
+            });
+        }
+        else {
+            res.send('');
+        }
+    });
+    request.end();
   })
   .get('/', function (req, res) {
     res

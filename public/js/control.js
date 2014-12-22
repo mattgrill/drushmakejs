@@ -51,5 +51,25 @@ var control         = {
           .html('');
       }
     });
+    $('#fs-contrib .another').click(function() {
+        var type = $('#fs-contrib .download .type option:selected').val();
+        switch (type) {
+            case 'drupal':
+                var project = $('#fs-contrib .download .unique').val();
+                if (!$('#fs-contrib #' + project).length) {
+                    $.get('/name/' + project, function(data) {
+                        if (data) {
+                            var humanName = data;
+                            $('#fs-contrib .modules.downloads').prepend('<label for="' + project + '-stable"><input type="checkbox" id="' + project + '-stable"><span class="title">' + humanName + '</span><select disabled="disabled" name="makefile[modules][' + project + ']" id="' + project + '"></select></label>');
+                        }
+                    });
+                }
+                break;
+            case 'file':
+                break;
+            case 'git':
+                break;
+        }
+    });
   }
 }
