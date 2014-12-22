@@ -91,5 +91,12 @@ var control         = {
                 break;
         }
     });
+    $('#fs-libs .another').click(function() {
+        var type = $('#fs-libs .download .type option:selected').val();
+        var project = $('#fs-libs .download .unique').val();
+        var url = $('#fs-libs .download .url').val();
+
+        $('#fs-libs .libraries.downloads').prepend('<label for="' + project + '-stable"><input type="checkbox" value="' + url + '" name="makefile[libs][' + project + '][url]" id="' + project + '-stable"> <span class="title">' + project + '</span><select disabled="disabled" name="makefile[libs][' + project + '][url]" id="' + project + '"><option value="' + url + '">' + project + '</option></select><input name="makefile[libs][' + project + '][type]" type="hidden" value="' + type + '"></label>');
+    });
   }
 }

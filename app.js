@@ -94,6 +94,7 @@ app
       output += 'projects[' + index + '][subdir] = "' + formData.opts.contrib_dir + '" \n'
       output += 'projects[' + index + '][version] = "' + item.split(formData.version+'.x-')[1] + '" \n\n'
     });
+
     delete formData.themes['|THIS|'];
     output += '; Themes \n\n';
     _.each(formData.themes, function (item, index) {
@@ -101,6 +102,18 @@ app
 
       output += 'projects[' + index + '][version] = "' + item.split(formData.version+'.x-')[1] + '" \n\n'
     });
+
+    delete formData.libs['|THIS|'];
+    output += '; Libraries \n\n';
+    _.each(formData.libs, function (item, index) {
+        if (item.url) {
+            output += '; ' + index + '\n';
+
+            output += 'libraries[' + index + '][type] = "' + item.type + '" \n';
+            output += 'libraries[' + index + '][url] = "' + item.url + '" \n\n'
+        }
+    });
+
     res
       .set('Content-Type', 'text/plain')
       .send(output);
