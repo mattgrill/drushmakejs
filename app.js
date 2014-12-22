@@ -94,6 +94,13 @@ app
       output += 'projects[' + index + '][subdir] = "' + formData.opts.contrib_dir + '" \n'
       output += 'projects[' + index + '][version] = "' + item.split(formData.version+'.x-')[1] + '" \n\n'
     });
+    delete formData.themes['|THIS|'];
+    output += '; Themes \n\n';
+    _.each(formData.themes, function (item, index) {
+      output += '; ' + index + '\n';
+
+      output += 'projects[' + index + '][version] = "' + item.split(formData.version+'.x-')[1] + '" \n\n'
+    });
     res
       .set('Content-Type', 'text/plain')
       .send(output);
