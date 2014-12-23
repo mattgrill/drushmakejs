@@ -16,7 +16,7 @@
     "express": "^4.9.8",
     "morgan": "^1.4.0",
     "underscore": "^1.7.0",
-    "https": "2.1.12"
+    "http": "^2.1.12"
   },
   "engines": {
     "node": "0.10.33"
