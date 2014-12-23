@@ -4,7 +4,7 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "start": "nodemon app.js"
+    "start": "node app.js"
   },
   "author": "Matthew Grill",
   "license": "MIT",
@@ -16,5 +16,8 @@
     "express": "^4.9.8",
     "morgan": "^1.4.0",
     "underscore": "^1.7.0"
+  },
+  "engines": {
+    "node": "0.10.33"
   }
 }

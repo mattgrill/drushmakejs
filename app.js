@@ -4,6 +4,7 @@ var express         = require('express'),
     bodyParser      = require('body-parser'),
     dustjs          = require('adaro'),
     _               = require('underscore'),
+    https           = require('https'),
     exec            = require('child_process').exec;
 
 app
@@ -49,6 +50,30 @@ app
 
     })
   })
+  .get('/name/:module_name', function (req, res) {
+    var options = {
+        hostname: 'www.drupal.org',
+        port: 443,
+        path: '/project/' + req.params.module_name,
+        method:  'GET'
+    };
+    var str = '';
+    var request = https.request(options, function(result) {
+        if (result.statusCode == 200) {
+            result.on('data', function(chunk) {
+                str += chunk;
+            });
+            result.on('end', function() {
+                var title = str.match(/<h1\b[^>]*>(.*?)<\/h1>/)[1];
+                res.send(title);
+            });
+        }
+        else {
+            res.send('');
+        }
+    });
+    request.end();
+  })
   .get('/', function (req, res) {
     res
       .render('index.dust', {});
@@ -69,10 +94,29 @@ app
       output += 'projects[' + index + '][subdir] = "' + formData.opts.contrib_dir + '" \n'
       output += 'projects[' + index + '][version] = "' + item.split(formData.version+'.x-')[1] + '" \n\n'
     });
+
+    delete formData.themes['|THIS|'];
+    output += '; Themes \n\n';
+    _.each(formData.themes, function (item, index) {
+      output += '; ' + index + '\n';
+
+      output += 'projects[' + index + '][version] = "' + item.split(formData.version+'.x-')[1] + '" \n\n'
+    });
+
+    delete formData.libs['|THIS|'];
+    output += '; Libraries \n\n';
+    _.each(formData.libs, function (item, index) {
+        if (item.url) {
+            output += '; ' + index + '\n';
+
+            output += 'libraries[' + index + '][type] = "' + item.type + '" \n';
+            output += 'libraries[' + index + '][url] = "' + item.url + '" \n\n'
+        }
+    });
+
     res
       .set('Content-Type', 'text/plain')
       .send(output);
   });
 
-app.listen(3000);
-console.log('listening on 3000');
+app.listen(process.env.PORT || 3000);

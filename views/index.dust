@@ -801,21 +801,24 @@
             <fieldset id="fs-libs">
               <legend><p>Libraries</p></legend>
               <label for="html5bp-stable">
-                <input id="html5bp-stable" type="checkbox" name="makefile[libs][html5bp]" value="http://github.com/h5bp/html5-boilerplate/zipball/v3.0.2stripped" /> <span class="title">HTML5 Boilerplate</span>
-                <select id="html5bp" name="makefile[libs][html5bp]" disabled="disabled">
+                <input id="html5bp-stable" type="checkbox" name="makefile[libs][html5bp][url]" value="http://github.com/h5bp/html5-boilerplate/zipball/v3.0.2stripped" /> <span class="title">HTML5 Boilerplate</span>
+                <select id="html5bp" name="makefile[libs][html5bp][url]" disabled="disabled">
                  <option value="http://github.com/h5bp/html5-boilerplate/zipball/v3.0.2stripped">Latest (3.0.2)</option></select>
+                <input name="makefile[libs][html5bp][type]" type="hidden" value="file">
                </label>
 
                <label for="jquery-stable">
-                <input id="jquery-stable" type="checkbox" name="makefile[libs][jquery]" value="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" /> <span class="title">jQuery</span>
-                <select id="jquery" name="makefile[libs][jquery]" disabled="disabled">
+                <input id="jquery-stable" type="checkbox" name="makefile[libs][jquery][url]" value="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" /> <span class="title">jQuery</span>
+                <select id="jquery" name="makefile[libs][jquery][url]" disabled="disabled">
                  <option value="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js">Latest (1.7.2)</option> <option value="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js">Use 1.4.4</option> <option value="https://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js">Use 1.3.2</option></select>
+                <input name="makefile[libs][jquery][type]" type="hidden" value="file">
                </label>
 
                <label for="jqueryui-stable">
-                <input id="jqueryui-stable" type="checkbox" name="makefile[libs][jqueryui]" value="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js" /> <span class="title">jQuery UI</span>
-                <select id="jqueryui" name="makefile[libs][jqueryui]" disabled="disabled">
+                <input id="jqueryui-stable" type="checkbox" name="makefile[libs][jqueryui][url]" value="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js" /> <span class="title">jQuery UI</span>
+                <select id="jqueryui" name="makefile[libs][jqueryui][url]" disabled="disabled">
                  <option value="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js">Latest (1.8.18)</option></select>
+                 <input name="makefile[libs][jqueryui][type]" type="hidden" value="file">
                </label>
                <div class="libraries downloads"><div class="download label"><a class="remove">remove</a><select name="makefile[libs][|THIS|][type]" class="type"><option value="file">www</option><option value="git">git</option></select><input type="text" class="unique" name="makefile[libs][|THIS|][unique]" placeholder="library" /> <input type="text" class="url" name="makefile[libs][|THIS|][url]" placeholder="#url" /><input type="hidden" name="makefile[libs][|THIS|][maketype]" value="libraries" /></div></div><a class="another">Add Another</a></fieldset>
                <fieldset id="fs-opts">
